@@ -2,19 +2,21 @@ version: 2.1
 
 jobs:
   build:
-    working_directory: ~/circleci-python
+    working_directory: ~/circleci-javascript
     docker:
-      - image: "circleci/python:3.6.4"
+      - image: "circleci/node:14.17"
     steps:
       - checkout
-      - run: python3 main.py
+      - run: npm install
+      - run: node main.js
   test:
-    working_directory: ~/circleci-python
+    working_directory: ~/circleci-javascript
     docker:
-      - image: "circleci/python:3.6.4"
+      - image: "circleci/node:14.17"
     steps:
       - checkout
-      - run: python3 main-test.py
+      - run: npm install
+      - run: npm test
 
 workflows:
   build_and_test:
